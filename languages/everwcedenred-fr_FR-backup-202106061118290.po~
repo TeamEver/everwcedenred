@@ -1,0 +1,305 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Edenred payment\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-06-05 06:46+0000\n"
+"PO-Revision-Date: 2021-06-06 11:18+0000\n"
+"Last-Translator: \n"
+"Language-Team: Français\n"
+"Language: fr_FR\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.5.2; wp-5.7.2\n"
+"X-Domain: everwcedenred"
+
+#: class-everwcedenred.php:69
+msgid "123456789123"
+msgstr "123456789123"
+
+#. Description of the plugin
+msgid "Accept Edenred payment in Woocommerce"
+msgstr "Acceptez le paiement par carte Edenred sur WooCommerce"
+
+#: class-everwcedenred.php:183
+msgid "Activate the plugin by checking the box \"Enable Edenred payment\""
+msgstr "Activez le plugin en cochant la case \"Activer le paiement Edenred\""
+
+#: class-everwcedenred.php:102
+msgid "Allowed categories"
+msgstr "Catégories autorisées"
+
+#: class-everwcedenred.php:20
+msgid "Allows payment from an Edenred card"
+msgstr "Permet le paiement depuis une carte Edenred"
+
+#: class-everwcedenred.php:178
+msgid ""
+"As soon as your contract is validated by Edenred, the plugin will "
+"automatically validate your data and add your MID."
+msgstr ""
+"Dès la validation de votre contrat par Edenred, le plugin validera "
+"automatiquement vos données et ajoutera votre MID."
+
+#: class-everwcedenred.php:146
+msgid "Ask Team Ever for help"
+msgstr "Demandez de l'aide à Team Ever"
+
+#: class-everwcedenred.php:229
+msgid "Beware : sandbox mode is enabled"
+msgstr "Attention : le mode bac à sable est activé"
+
+#: class-everwcedenred.php:297
+msgid "Cart not valid."
+msgstr "Panier invalide"
+
+#: class-everwcedenred.php:175
+msgid ""
+"Complete the form below to prepare the payment method according to your "
+"category criteria"
+msgstr ""
+"Remplissez le formulaire ci-dessous pour préparer le mode de paiement selon "
+"vos critères de catégorie"
+
+#: class-everwcedenred.php:117
+msgid "Customer Message"
+msgstr "Message client"
+
+#: class-everwcedenred.php:83
+msgid "Customers will be able to partial pay their orders using Edenred"
+msgstr "Les clients pourront régler partiellement leurs commandes via Edenred"
+
+#: class-everwcedenred.php:95
+msgid "Edenred max allowed amount"
+msgstr "Montant maximum autorisé Edenred"
+
+#: class-everwcedenred.php:73
+msgid "Edenred MID"
+msgstr "MID Edenred"
+
+#: class-everwcedenred.php:88
+msgid "Edenred min payment amount"
+msgstr "Montant minimum du paiement Edenred"
+
+#: class-everwcedenred.php:21
+msgid "Edenred Payment"
+msgstr "Paiement par carte Edenred"
+
+#: class-everwcedenred.php:19 class-everwcedenred.php:113
+msgid "Edenred payment"
+msgstr "Paiement par carte Edenred"
+
+#: class-everwcedenred.php:355
+msgid "Edenred payment error : "
+msgstr "Erreur de paiement Edenred:"
+
+#: class-everwcedenred.php:302
+msgid "Edenred payment is not valid. Please connect before validate payment."
+msgstr ""
+"Le paiement Edenred n'est pas valide. Veuillez vous connecter avant de "
+"valider le paiement."
+
+#: class-everwcedenred.php:110
+msgid "Edenred payment Title"
+msgstr "Titre du mode de paiement Edenred"
+
+#: class-everwcedenred.php:225
+msgid "Edenred sandbox message : "
+msgstr "Edenred sandbox message :"
+
+#: class-everwcedenred.php:137
+msgid "Edenred settings"
+msgstr "Réglages Edenred"
+
+#: class-everwcedenred.php:378
+msgid "Edenred transaction not allowed"
+msgstr "Transaction Edenred non autorisée"
+
+#: class-everwcedenred.php:60
+msgid "Enable Edenred payment"
+msgstr "Activer le paiement Edenred"
+
+#: class-everwcedenred.php:61
+msgid "Enable Edenred payment on your shop"
+msgstr "Activez le paiement Edenred sur votre boutique"
+
+#: class-everwcedenred.php:80 class-everwcedenred.php:82
+msgid "Enable partial Edenred payment"
+msgstr "Activer le paiement partiel Edenred"
+
+#: class-everwcedenred.php:58
+msgid "Enable/Disable"
+msgstr "Activer/désactiver"
+
+#: class-everwcedenred.php:172
+msgid ""
+"Enter the siret number of your point of sale (not that of your office) in "
+"the configuration of the plugin, this will allow you to find the contract "
+"associated with your company"
+msgstr ""
+"Entrez le numéro de siret de votre point de vente (pas celui de votre bureau)"
+" dans la configuration du plugin, cela vous permettra de retrouver le "
+"contrat associé à votre entreprise"
+
+#: class-everwcedenred.php:188
+msgid "Everything is fine, you already have configured this plugin !"
+msgstr "Tout va bien, vous avez déjà configuré ce plugin !"
+
+#: class-everwcedenred.php:166
+msgid "First, sign the Edenred contract by clicking here"
+msgstr "Tout d'abord, signez le contrat Edenred en cliquant ici"
+
+#: class-everwcedenred.php:158
+msgid "How to configure this plugin ?"
+msgstr "Comment configurer ce plugin ?"
+
+#. URI of the plugin
+msgid "http://www.team-ever.com"
+msgstr "https://www.team-ever.com"
+
+#. Author URI of the plugin
+msgid "https://www.team-ever.com"
+msgstr "https://www.team-ever.com"
+
+#: class-everwcedenred.php:246
+msgid ""
+"If total paid using your Edenred account is less than order total, you will "
+"have to pay the balance for your order by selecting another payment method."
+msgstr ""
+"Si le total payé via votre compte Edenred est inférieur au total de la "
+"commande, vous devrez régler le solde de votre commande en sélectionnant un "
+"autre mode de paiement."
+
+#: everwcedenred.php:152
+msgid "Including Edenred payment:"
+msgstr "Incluant le paiement Edenred :"
+
+#: class-everwcedenred.php:261
+msgid "Login to Edenred account"
+msgstr "Se connecter à mon compte Edenred"
+
+#: class-everwcedenred.php:97
+msgid ""
+"Max allowed payement amount, leave 0 for no use, only if partial payments "
+"are allowed"
+msgstr ""
+"Montant de paiement maximum autorisé, laissez 0 pour aucune utilisation, "
+"uniquement si les paiements partiels sont autorisés"
+
+#: class-everwcedenred.php:336
+msgid "Maximum amount allowed with this payment method is overloaded"
+msgstr "Le montant maximum autorisé avec ce mode de paiement est dépassé"
+
+#: class-everwcedenred.php:90
+msgid ""
+"Min allowed payement amount, leave 1 for no use, only if partial payments "
+"are allowed"
+msgstr ""
+"Min allowed payement amount, leave 1 for no use, only if partial payments "
+"are allowed"
+
+#: class-everwcedenred.php:105
+msgid "Only products in allowed categories will be bought using Edenred."
+msgstr ""
+"Seuls les produits des catégories autorisées pourront être commandés via "
+"Edenred."
+
+#: class-everwcedenred.php:324
+msgid "Partial payment amount not valid"
+msgstr "Montant du paiement partiel non valide"
+
+#: class-everwcedenred.php:239
+msgid "Partially pay for order with Edenred account"
+msgstr "Payer partiellement la commande avec le compte Edenred"
+
+#: class-everwcedenred.php:386
+msgid "Payment received using Edenred."
+msgstr "Paiement reçu via Edenred."
+
+#: class-everwcedenred.php:68
+msgid "Please add point of sale SIRET (format 123456789123)"
+msgstr "Veuillez ajouter le SIRET du point de vente (format 123456789123)"
+
+#: class-everwcedenred.php:243
+msgid "Please enter the amount you wish to pay with Edenred."
+msgstr "Veuillez saisir le montant que vous souhaitez payer avec Edenred."
+
+#: class-everwcedenred.php:66
+msgid "Point of sale SIRET"
+msgstr "SIRET du point de vente"
+
+#: everwcedenred.php:194
+msgid "Settings"
+msgstr "Réglages"
+
+#: class-everwcedenred.php:151
+msgid "Sign Edenred contract"
+msgstr "Signer le contrat Edenred"
+
+#. Author of the plugin
+msgid "Team Ever"
+msgstr "Team Ever"
+
+#: class-everwcedenred.php:120
+msgid ""
+"The message which you want it to appear to the customer in the checkout page."
+msgstr ""
+"Le message que vous souhaitez afficher au client dans la page de paiement."
+
+#: class-everwcedenred.php:112
+msgid "This controls the payment title"
+msgstr "Ceci contrôle le titre du mode paiement"
+
+#: class-everwcedenred.php:142
+msgid "URLs (production, recette)"
+msgstr "URLs (production, recette)"
+
+#: class-everwcedenred.php:75
+msgid "Will be automatically set when your Edenred account is valid"
+msgstr ""
+"Sera paramétré automatiquement lorsque votre compte Edenred sera valide"
+
+#. Name of the plugin
+msgid "WooCommerce Edenred payment"
+msgstr "Paiement WooCommerce Edenred"
+
+#: class-everwcedenred.php:371
+msgid "You can now validate your order using another payment method"
+msgstr ""
+"Vous pouvez maintenant valider votre commande en utilisant un autre mode de "
+"paiement"
+
+#: class-everwcedenred.php:253
+msgid ""
+"You can now validate your order, your Edenred account will be used for "
+"payment"
+msgstr ""
+"Vous pouvez maintenant valider votre commande, votre compte Edenred sera "
+"utilisé pour le paiement"
+
+#: class-everwcedenred.php:311
+msgid ""
+"You dont have enough funds on your Edenred account. Please choose another "
+"payment method."
+msgstr ""
+"Vous n'avez pas assez de fonds sur votre compte Edenred. Veuillez choisir un "
+"autre mode de paiement."
+
+#: class-everwcedenred.php:330
+msgid "You have not reached minimum amount to use this payment method"
+msgstr ""
+"Vous n'avez pas atteint le montant minimum pour utiliser ce mode de paiement"
+
+#: everwcedenred.php:98
+msgid "Your Edenred account has been charged with : "
+msgstr "Votre compte Edenred a été débité de :"
+
+#: class-everwcedenred.php:191
+msgid ""
+"In order to check the available balance on the Edenred account, customers "
+"must use the payment email address used for the Edenred account. In case of "
+"validated partial payment, this email address can be changed to finalize the "
+"order."
+msgstr ""

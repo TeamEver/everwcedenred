@@ -1,0 +1,36 @@
+#edenred-logo{
+	margin-top: 5%!important;
+}
+.edenred-description{
+	text-align: center;
+	font-weight: bold;
+}
+.edenred-error{
+	background-color: #e2401c;
+	color: #fff;
+	border-left: 10px solid rgba(0,0,0,0.15);
+	font-size: 14px;
+	padding: 15px 20px;
+	margin-bottom: 25px;
+	border-radius: 2px;
+	text-transform: none;
+}
+.edenred-partial-form{
+    background-color: #6c757d!important;
+    color: #fff;
+    padding: 2%;
+    text-align: center;
+}
+.edenred-partial-form input[type=number]{
+	color:#000!important;
+	max-width: 50%;
+}
+/* Missing Bootstrap */
+@media screen and (min-width: 992px) {
+	.col-md-3, .span3 {
+	    width: 25%;
+	}
+	.col-md-9, .span9 {
+	    width: 75%;
+	}
+}

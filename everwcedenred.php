@@ -3,7 +3,7 @@
  * Plugin Name:       WooCommerce Edenred payment
  * Plugin URI:        http://www.team-ever.com
  * Description:       Accept Edenred payment in Woocommerce
- * Version:           3.6.7
+ * Version:           3.6.8
  * Author:            Cyril CHALAMON - Team Ever
  * Author URI:        https://www.team-ever.com
  * Text Domain:       everwcedenred
@@ -457,8 +457,8 @@ if(in_array('woocommerce/woocommerce.php', $active_plugins)){
     $default_settings['min_payment'] = '1';
     $default_settings['max_payment'] = '19';
     $default_settings['allowed_categories'] = $array_for_settings;
-    $default_settings['title'] = 'Paiement par carte Edenred';
-    $default_settings['description'] = 'Merci de préparer votre carte Edenred';
+    $default_settings['title'] = 'Paiement par carte Ticket Restaurant® Edenred';
+    $default_settings['description'] = 'Merci de préparer votre carte Ticket Restaurant® Edenred';
     update_option('woocommerce_edenred_settings', $default_settings);
   }
   register_activation_hook(__FILE__,'edenred_install');

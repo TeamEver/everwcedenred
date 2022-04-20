@@ -13,11 +13,11 @@ class WC_Edenred_Payment_Gateway extends WC_Payment_Gateway{
     */
     public function __construct(){
         $this->id = 'edenred';
-        $this->version = '3.6.7';
+        $this->version = '3.6.8';
         $this->plugin_name = 'everwcedenred';
         $this->icon = plugin_dir_url(__FILE__).'views/img/edenred-icon.png';
         $this->method_title = __('Edenred payment','everwcedenred');
-        $this->method_description = __( 'Allows payment from an Edenred card', 'everwcedenred' );
+        $this->method_description = __( 'Allows payment from an Edenred Ticket Restaurant® card', 'everwcedenred' );
         $this->title = __('Edenred Payment','everwcedenred');
         $this->has_fields = true;
         $this->supports           = array(

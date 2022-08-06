@@ -3,7 +3,7 @@
  * Plugin Name:       WooCommerce Edenred payment
  * Plugin URI:        http://www.team-ever.com
  * Description:       Accept Edenred payment in Woocommerce
- * Version:           3.6.8
+ * Version:           4.1.1
  * Author:            Cyril CHALAMON - Team Ever
  * Author URI:        https://www.team-ever.com
  * Text Domain:       everwcedenred
@@ -13,7 +13,12 @@
  * Author:       Cyril CHALAMON - Team Ever
  */
 $active_plugins = apply_filters('active_plugins', get_option('active_plugins'));
-if(in_array('woocommerce/woocommerce.php', $active_plugins)){
+if ( !function_exists( 'is_plugin_active_for_network' ) ) {
+  require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+}
+$is_plugin_active_for_network = is_plugin_active_for_network('woocommerce/woocommerce.php');
+$is_plugin_active_for_shop = in_array('woocommerce/woocommerce.php', $active_plugins);
+if ($is_plugin_active_for_network || $is_plugin_active_for_shop){
   add_filter('woocommerce_payment_gateways', 'add_edenred_payment_gateway');
   function add_edenred_payment_gateway( $gateways ){
     $gateways[] = 'WC_Edenred_Payment_Gateway';

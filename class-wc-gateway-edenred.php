@@ -6,18 +6,31 @@
  * Author:       Cyril CHALAMON - Team Ever
  */
 
-class WC_Edenred_Payment_Gateway extends WC_Payment_Gateway{
+class WC_Gateway_Edenred extends WC_Payment_Gateway
+{
+    public $checkout_url;
+    public $edenred_validation_url;
+    public $siret;
+    public $partial_payment;
+    public $max_payment;
+    public $allowed_categories;
+    public $mid;
+    public $sandbox;
+    public $only_logged;
+    public $login_link;
+
     /**
      * Payment gateway construct method
      * @see https://rudrastyh.com/woocommerce/payment-gateway-plugin.html
     */
-    public function __construct(){
+    public function __construct()
+    {
         $this->id = 'edenred';
-        $this->version = '3.6.8';
-        $this->plugin_name = 'everwcedenred';
         $this->icon = plugin_dir_url(__FILE__).'views/img/edenred-icon.png';
         $this->method_title = __('Edenred payment','everwcedenred');
         $this->method_description = __( 'Allows payment from an Edenred Ticket Restaurant® card', 'everwcedenred' );
+
+        $this->order_button_text = __('Edenred Payment','everwcedenred');
         $this->title = __('Edenred Payment','everwcedenred');
         $this->has_fields = true;
         $this->supports           = array(
@@ -26,6 +39,7 @@ class WC_Edenred_Payment_Gateway extends WC_Payment_Gateway{
         );
         $this->init_form_fields();
         $this->init_settings();
+        // $this->payment_fields();
         $this->checkout_url = wc_get_checkout_url();
         if (substr($this->checkout_url, -1) == '/') {
             $this->checkout_url = substr($this->checkout_url, 0, -1);
@@ -231,14 +245,6 @@ class WC_Edenred_Payment_Gateway extends WC_Payment_Gateway{
                     </ul>
                     <p></p>
                 </div>
-                <?php
-                if ((bool)$this->everwcedenred_check_version($this->plugin_name, $this->version) === true) {
-                     echo '<div class=" col-12 alert alert-warning">
-                         <p>A new version of Ever Woo Referral is available</p>
-                         <p>Please check latest version at <a href="https://www.team-ever.com/mon-compte/" target="_blank">https://www.team-ever.com/mon-compte/</a></p>
-                     </div>';
-                }
-                ?>
             </div>
         </div>
         <table class="form-table">
@@ -250,14 +256,13 @@ class WC_Edenred_Payment_Gateway extends WC_Payment_Gateway{
         <?php
     }
 
-    public function payment_fields() {
-        if (!$this->is_allowed_cart()) {
+    public function payment_fields()
+    {
+        $access_token = WC()->session->get( 'edenred_access_token' );
+        if (WC()->session->get( 'edenred_left_to_pay' )) {
             return;
         }
-        do_action( 'woocommerce_edenred_card_form_start', $this->id );
-        $access_token = WC()->session->get( 'edenred_access_token' );
         ?>
-        
         <?php
         if ( $this->enabled === 'no' ) {
             $error = WC()->session->get( 'edenred_access_error' );
@@ -282,8 +287,6 @@ class WC_Edenred_Payment_Gateway extends WC_Payment_Gateway{
             if ($this->partial_payment == 'yes') {
             ?>
             <div class="form-group edenred-partial-form">
-                <label for="edenred_partial_payment"><?php _e( 'Partially pay for order with Edenred account', 'everwcedenred' ); ?></label>
-                <br>
                 <input type="number" class="form-control" id="edenred_partial_payment" name="edenred_partial_payment" aria-describedby="edenred_partial_payment_help" value="<?php if (isset($this->max_payment) && (int)$this->max_payment > 0) { echo $this->max_payment; } else { echo '0';} ?>" <?php if (isset($this->max_payment) && (int)$this->max_payment > 0) { echo 'max="'.$this->max_payment.'"'; } ?> required> <?php echo get_woocommerce_currency_symbol(); ?>
                 <p>
                     <small><?php _e( 'Please enter the amount you wish to pay with Edenred.', 'everwcedenred' ); ?></small>
@@ -303,14 +306,13 @@ class WC_Edenred_Payment_Gateway extends WC_Payment_Gateway{
         } else {
         ?>
         <p class="edenred-description text-center"><?php echo esc_attr($this->description); ?></p>
-        <a href="https://edenred.team-ever.com/edenred?mid=<?php echo $this->mid; ?>&checkout_url=<?php echo $this->checkout_url; ?>&language=<?php echo strtolower(get_bloginfo( 'language' )); ?>&state=<?php echo wp_create_nonce( 'edenred-state' ); ?>&nonce=<?php echo wp_create_nonce( 'edenred-api' ); ?>&login_link=1" class="checkout-button button alt wc-forward">
+        <a href="https://edenred.team-ever.com/edenred?mid=<?php echo $this->get_option('mid'); ?>&checkout_url=<?php echo $this->checkout_url; ?>&language=<?php echo strtolower(get_bloginfo( 'language' )); ?>&state=<?php echo wp_create_nonce( 'edenred-state' ); ?>&nonce=<?php echo wp_create_nonce( 'edenred-api' ); ?>&login_link=1&checkout_url=https://wc.team-ever.com/commander/" class="checkout-button button alt wc-forward">
             <?php _e( 'Login to Edenred account', 'everwcedenred' ); ?>
         </a>
         <?php
         }
         ?>
         <?php
-        do_action( 'woocommerce_edenred_card_form_end', $this->id );
     }
     /**
      * Check admin form values
@@ -339,8 +341,8 @@ class WC_Edenred_Payment_Gateway extends WC_Payment_Gateway{
     /**
      * Process payment
     */
-    public function process_payment( $order_id ) {
-
+    public function process_payment( $order_id )
+    {
         if (!$this->is_allowed_cart()) {
             wc_add_notice( __( 'Cart not valid.', 'everwcedenred' ), 'error' );
             return false;
@@ -420,12 +422,11 @@ class WC_Edenred_Payment_Gateway extends WC_Payment_Gateway{
                 WC()->session->set( 'edenred_mid', sanitize_text_field($transaction->mid) );
                 WC()->session->set( 'edenred_capture_id', sanitize_text_field($transaction->capture_id) );
                 WC()->session->set( 'edenred_authorization_id', sanitize_text_field($transaction->authorization_id) );
-
+                wp_delete_post($order_id,true);
+                do_action('woocommerce_before_calculate_totals');
+                // Après avoir défini les sessions et avant de retourner dans votre condition de paiement partiel.
                 wc_add_notice( __( 'You can now validate your order using another payment method', 'everwcedenred' ), 'success' );
-                // Drop order to avoid double orders on admin
-                wp_delete_post($order_id, true);
-                // return false to allow customer select another payment method
-                return false;
+                return;
             }
         } else {
             wc_add_notice( __( 'Edenred transaction not allowed', 'everwcedenred' ), 'error' );
@@ -474,8 +475,8 @@ class WC_Edenred_Payment_Gateway extends WC_Payment_Gateway{
     /*
      * In case you need a webhook, like PayPal IPN etc
      */
-    public function webhook() {
-
+    public function webhook()
+    {
         $order = wc_get_order( $_GET['id'] );
         $order->payment_complete();
         $order->reduce_order_stock();
@@ -489,7 +490,8 @@ class WC_Edenred_Payment_Gateway extends WC_Payment_Gateway{
      * Get all product categories in WooCommerce
      * @return array for multiselect or only select
     */
-    private function get_product_categories_array() {
+    private function get_product_categories_array()
+    {
         if ( !is_admin()) {
             return;
         }
@@ -510,7 +512,8 @@ class WC_Edenred_Payment_Gateway extends WC_Payment_Gateway{
      * Check if cart is allowed depending on products and allowed categories
      * @return bool
     */
-    private function is_allowed_cart(){
+    private function is_allowed_cart()
+    {
         if ( is_admin() || ! is_checkout()) {
             return;
         }
@@ -540,7 +543,8 @@ class WC_Edenred_Payment_Gateway extends WC_Payment_Gateway{
      * @return array of allowed payments
      * @link https://www.businessbloomer.com/woocommerce-disable-payment-method-for-specific-category/
     */
-    public function edenred_unset_gateway( $available_gateways ) {
+    public function edenred_unset_gateway( $available_gateways )
+    {
         if ( is_admin() || ! is_checkout()) {
             return $available_gateways;
         }
@@ -562,7 +566,7 @@ class WC_Edenred_Payment_Gateway extends WC_Payment_Gateway{
             unset( $available_gateways[$this->id] );
             return $available_gateways;
         }
-        if (WC()->session->get( 'edenred_paid_amount' )) {
+        if (WC()->session->get( 'edenred_left_to_pay' )) {
             unset( $available_gateways[$this->id] );
             return $available_gateways;
         }
@@ -590,7 +594,8 @@ class WC_Edenred_Payment_Gateway extends WC_Payment_Gateway{
         return $available_gateways;
     }
 
-    private function get_edenred_balance($access_token, $email) {
+    private function get_edenred_balance($access_token, $email)
+    {
         if (!$this->mid || empty($this->mid)) {
             return false;
         }
@@ -622,7 +627,8 @@ class WC_Edenred_Payment_Gateway extends WC_Payment_Gateway{
      * @return obj or false
      * @see https://documenter.getpostman.com/view/10405248/TVewaQQX#872651b9-8d3e-4a89-8ddc-815e1c1335d7
     */
-    private function authorize_edenred_transaction($access_token, $order_id, $edenred_partial_payment = 0) {
+    private function authorize_edenred_transaction($access_token, $order_id, $edenred_partial_payment = 0)
+    {
         if (!$this->mid || empty($this->mid)) {
             return false;
         }
@@ -661,7 +667,8 @@ class WC_Edenred_Payment_Gateway extends WC_Payment_Gateway{
      * @param string/int company siret
      * @return string/int mid, false if not found or not valid
     */
-    private function get_edenred_login_link() {
+    private function get_edenred_login_link()
+    {
         if (!$this->mid || empty($this->mid)) {
             return false;
         }
@@ -694,7 +701,8 @@ class WC_Edenred_Payment_Gateway extends WC_Payment_Gateway{
      * @param string/int company siret
      * @return string/int mid, false if not found or not valid
     */
-    private function get_edenred_mid($siret) {
+    private function get_edenred_mid($siret)
+    {
         if (!$this->siret || empty($this->siret)) {
             return;
         }
@@ -729,7 +737,8 @@ class WC_Edenred_Payment_Gateway extends WC_Payment_Gateway{
      * @param  string $reason Refund reason.
      * @return bool|WP_Error
      */
-    public function process_refund( $order_id, $amount = null, $reason = '' ) {
+    public function process_refund( $order_id, $amount = null, $reason = '' )
+    {
         $order = wc_get_order( $order_id );
         $is_sandbox = get_post_meta( $order_id, '_is_sandbox', true );
         if ($is_sandbox && !empty($is_sandbox)) {
@@ -758,7 +767,8 @@ class WC_Edenred_Payment_Gateway extends WC_Payment_Gateway{
     }
 
     // refundEdenredOrder
-    private function refund_edenred_order($amount, $order_id) {
+    private function refund_edenred_order($amount, $order_id)
+    {
         if (!$this->mid || empty($this->mid)) {
             return false;
         }
@@ -784,35 +794,10 @@ class WC_Edenred_Payment_Gateway extends WC_Payment_Gateway{
           return false;
         }
         return $refund;
-    }    
+    }  
 
-    /*
-    * Check latest version of plugin
-    */
-    private function everwcedenred_check_version($module, $version)
+    private function edenred_get_random_string($length = 10)
     {
-        $upgrade_link = 'https://upgrade.team-ever.com/upgrade.php?module='
-        .$module
-        .'&version='
-        .$version;
-        $handle = curl_init($upgrade_link);
-        curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-        $module_version = curl_exec($handle);
-        $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
-        curl_close($handle);
-        if ($httpCode != 200) {
-          return false;
-        }
-
-        if ($module_version && $module_version > $version) {
-            if (version_compare( $module_version, $version, '<' ) >= 0) {
-              return true;
-            }
-        }
-        return false;
-    }
-
-    private function edenred_get_random_string($length = 10) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomString = '';
@@ -827,7 +812,8 @@ class WC_Edenred_Payment_Gateway extends WC_Payment_Gateway{
      * @param bool export for CSV file, bool export_all for rendereing all orders using edenred
      * @return array of orders or CSV file
     */
-    private function get_edenred_orders($export = false, $export_all = false) {
+    private function get_edenred_orders($export = false, $export_all = false)
+    {
         $filename = 'edenred_orders.csv';
         $header_row = array(
             __( 'ORDER ID', 'everwcedenred' ),
@@ -878,7 +864,6 @@ class WC_Edenred_Payment_Gateway extends WC_Payment_Gateway{
         header( 'Pragma: public' );
         fputcsv( $fh, $header_row, ';' );
         foreach ( $orders_list as $data_row ) {
-            // die(var_dump($data_row));
             fputcsv( $fh, $data_row, ';' );
         }
         fclose($fh);

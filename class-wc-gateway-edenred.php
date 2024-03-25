@@ -306,7 +306,7 @@ class WC_Gateway_Edenred extends WC_Payment_Gateway
         } else {
         ?>
         <p class="edenred-description text-center"><?php echo esc_attr($this->description); ?></p>
-        <a href="https://edenred.team-ever.com/edenred?mid=<?php echo $this->get_option('mid'); ?>&checkout_url=<?php echo $this->checkout_url; ?>&language=<?php echo strtolower(get_bloginfo( 'language' )); ?>&state=<?php echo wp_create_nonce( 'edenred-state' ); ?>&nonce=<?php echo wp_create_nonce( 'edenred-api' ); ?>&login_link=1&checkout_url=https://wc.team-ever.com/commander/" class="checkout-button button alt wc-forward">
+        <a href="https://edenred.team-ever.com/edenred?mid=<?php echo $this->get_option('mid'); ?>&checkout_url=<?php echo $this->checkout_url; ?>&language=<?php echo strtolower(get_bloginfo( 'language' )); ?>&state=<?php echo wp_create_nonce( 'edenred-state' ); ?>&nonce=<?php echo wp_create_nonce( 'edenred-api' ); ?>&login_link=1&checkout_url=<?php echo $this->checkout_url; ?>" class="checkout-button button alt wc-forward">
             <?php _e( 'Login to Edenred account', 'everwcedenred' ); ?>
         </a>
         <?php

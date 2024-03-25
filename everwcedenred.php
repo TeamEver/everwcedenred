@@ -3,7 +3,7 @@
  * Plugin Name:       WooCommerce Edenred payment
  * Plugin URI:        http://www.team-ever.com
  * Description:       Accept Edenred payment in Woocommerce
- * Version:           5.0.1
+ * Version:           5.0.2
  * Author:            Cyril CHALAMON - Team Ever
  * Author URI:        https://www.team-ever.com
  * Text Domain:       everwcedenred
